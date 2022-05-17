@@ -3,23 +3,27 @@ use bevy_egui::{egui, EguiContext, EguiPlugin};
 
 fn main() {
     App::new()
-        .insert_resource(WindowDescriptor {            
+        .insert_resource(GameState::default())
+        .insert_resource(WindowDescriptor {
             title: "AutoRPG".to_string(),
-            ..default()         
+            ..default()
         })
         .add_plugins(DefaultPlugins)
         .add_plugin(EguiPlugin)
-        //.add_startup_system(setup)
-        .add_system(ui_example)
+        .add_system(ui_system)
         .run();
 }
 
-//fn _setup(mut commands: Commands, asset_server: Res<AssetServer>) {}
+#[derive(Default)]
+struct GameState {
+    click_count: i32,
+}
 
-fn ui_example(mut egui_ctx: ResMut<EguiContext>) {
+fn ui_system(mut egui_ctx: ResMut<EguiContext>, mut ui_state: ResMut<GameState>) {
     egui::CentralPanel::default().show(egui_ctx.ctx_mut(), |ui| {
         if ui.button("Click me").clicked() {
-            
+            ui_state.click_count += 1;
         }
+        ui.label(format!("You've clicked {} times!", ui_state.click_count));
     });
 }
