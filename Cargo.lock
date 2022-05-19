@@ -187,18 +187,19 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "73b5e5f48b927f04e952dedc932f31995a65a0bf65ec971c74436e51bf6e970d"
 
 [[package]]
-name = "auto-rpg"
-version = "0.1.0"
-dependencies = [
- "bevy",
- "bevy_egui",
-]
-
-[[package]]
 name = "autocfg"
 version = "1.1.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "d468802bab17cbc0cc575e9b053f41e72aa36bfa6b7f55e3529ffa43161b97fa"
+
+[[package]]
+name = "autorpg"
+version = "0.1.0"
+dependencies = [
+ "bevy",
+ "bevy_egui",
+ "game_plugins",
+]
 
 [[package]]
 name = "base-x"
@@ -1493,6 +1494,14 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "c31b6d751ae2c7f11320402d34e41349dd1016f8d5d45e48c4312bc8625af50c"
 dependencies = [
  "byteorder",
+]
+
+[[package]]
+name = "game_plugins"
+version = "0.1.0"
+dependencies = [
+ "bevy",
+ "bevy_egui",
 ]
 
 [[package]]
