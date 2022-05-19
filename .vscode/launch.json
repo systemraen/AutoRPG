@@ -7,15 +7,15 @@
         {
             "type": "lldb",
             "request": "launch",
-            "name": "Debug executable 'auto-rpg'",
+            "name": "Debug executable 'autorpg'",
             "cargo": {
                 "args": [
                     "build",
-                    "--bin=auto-rpg",
-                    "--package=auto-rpg"
+                    "--bin=autorpg",
+                    "--package=autorpg"
                 ],
                 "filter": {
-                    "name": "auto-rpg",
+                    "name": "autorpg",
                     "kind": "bin"
                 }
             },
@@ -25,16 +25,16 @@
         {
             "type": "lldb",
             "request": "launch",
-            "name": "Debug unit tests in executable 'auto-rpg'",
+            "name": "Debug unit tests in executable 'autorpg'",
             "cargo": {
                 "args": [
                     "test",
                     "--no-run",
-                    "--bin=auto-rpg",
-                    "--package=auto-rpg"
+                    "--bin=autorpg",
+                    "--package=autorpg"
                 ],
                 "filter": {
-                    "name": "auto-rpg",
+                    "name": "autorpg",
                     "kind": "bin"
                 }
             },

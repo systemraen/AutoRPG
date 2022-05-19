@@ -1,8 +1,6 @@
-use bevy::prelude::*;
-use bevy_egui::{
-    egui::{self, Button, CentralPanel, Layout, RichText, Ui},
-    EguiContext, EguiPlugin,
-};
+use bevy::prelude::{DefaultPlugins, WindowDescriptor, default, App};
+use bevy_egui::EguiPlugin;
+use game_plugin::GamePlugin;
 
 fn main() {
     App::new()
@@ -11,7 +9,7 @@ fn main() {
             ..default()
         })
         .add_plugins(DefaultPlugins)
-        .add_plugin(EguiPlugin)
-        .add_plugin(Game::default())
+        .add_plugin(GamePlugin)
+        .add_plugin(EguiPlugin)        
         .run();
 }

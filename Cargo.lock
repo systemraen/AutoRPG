@@ -198,7 +198,7 @@ version = "0.1.0"
 dependencies = [
  "bevy",
  "bevy_egui",
- "game_plugins",
+ "game_plugin",
 ]
 
 [[package]]
@@ -1497,7 +1497,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "game_plugins"
+name = "game_plugin"
 version = "0.1.0"
 dependencies = [
  "bevy",

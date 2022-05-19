@@ -6,9 +6,9 @@ edition = "2021"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-game_plugins = { path = "game_plugins" }
+game_plugin = { path = "game_plugin" }
 bevy = "0.7.0"
 bevy_egui = "0.14.0"
 
 [workspace]
-members = [".", "game_plugins"]
+members = [".", "game_plugin"]
