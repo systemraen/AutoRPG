@@ -1,7 +1,15 @@
-use bevy::prelude::{ResMut};
+use bevy::prelude::{ResMut, Plugin, App};
 use bevy_egui::{EguiContext, egui};
 
-pub fn ui_system(mut egui_ctx: ResMut<EguiContext>, game_state: ResMut<crate::GameState>) {
+pub struct UiPlugin;
+
+impl Plugin for UiPlugin {
+    fn build(&self, app: &mut App) {
+        app.add_system(ui_system);
+    }
+}
+
+fn ui_system(mut egui_ctx: ResMut<EguiContext>, game_state: ResMut<crate::GameState>) {
     egui::CentralPanel::default().show(egui_ctx.ctx_mut(), |ui| {
         add_clicker(ui, game_state);
     });
