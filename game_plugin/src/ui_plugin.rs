@@ -1,5 +1,8 @@
-use bevy::prelude::{ResMut, Plugin, App};
-use bevy_egui::{EguiContext, egui};
+use bevy::prelude::{App, Plugin, ResMut};
+use bevy_egui::{
+    egui::{self, Frame, Stroke, Align2, Rect},
+    EguiContext,
+};
 
 pub struct UiPlugin;
 
@@ -10,26 +13,33 @@ impl Plugin for UiPlugin {
 }
 
 fn ui_system(mut egui_ctx: ResMut<EguiContext>, game_state: ResMut<crate::GameState>) {
-    egui::CentralPanel::default().show(egui_ctx.ctx_mut(), |ui| {
-        add_clicker(ui, game_state);
-    });
+    egui::Window::new("")
+        .anchor(Align2::CENTER_CENTER, (0.,0.))
+        .title_bar(false)
+        .resizable(false)
+        .collapsible(false)
+        // .frame(Frame {
+        //     //stroke: Stroke::none(),
+        //     ..Default::default()
+        // })
+        .show(egui_ctx.ctx_mut(), |ui| {
+            add_clicker(ui, game_state);
+        });
 }
 
 fn add_clicker(ui: &mut egui::Ui, mut game_state: ResMut<crate::GameState>) {
-    ui.with_layout(
-        egui::Layout::from_main_dir_and_cross_align(egui::Direction::TopDown, egui::Align::Center),
-        |ui| {
-            if ui
-                .add_sized(
-                    [200.0, 200.0],
-                    egui::Button::new(egui::RichText::new("Click me!").size(32.0)),
-                )
-                .clicked()
-            {
-                game_state.click_count += 1;
-            }
+    ui.with_layout(egui::Layout::top_down(egui::Align::Center), |ui| {
+        if ui
+            .add_sized(
+                [200.0, 200.0],
+                egui::Button::new(egui::RichText::new("Click me!").size(32.0)),
+            )
+            .clicked()
+        {
+            game_state.click_count += 1;
+        }
 
-            ui.label(format!("You've clicked {} times!", game_state.click_count));
-        },
-    );
+        let click_text = format!("You've clicked {} times!", game_state.click_count);
+        ui.label(egui::RichText::new(click_text).size(32.0));
+    });
 }
