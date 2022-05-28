@@ -1,5 +1,4 @@
 use bevy::prelude::{DefaultPlugins, WindowDescriptor, default, App};
-use bevy_egui::EguiPlugin;
 use game_plugin::GamePlugin;
 
 fn main() {
@@ -9,7 +8,6 @@ fn main() {
             ..default()
         })
         .add_plugins(DefaultPlugins)
-        .add_plugin(GamePlugin)
-        .add_plugin(EguiPlugin)        
+        .add_plugin(GamePlugin)      
         .run();
 }

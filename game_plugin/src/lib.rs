@@ -1,4 +1,6 @@
-use bevy::prelude::{App, Plugin};
+use bevy::{prelude::{App, Plugin, KeyCode, Commands, Res}, input::Input};
+use bevy_egui::EguiPlugin;
+use iyes_loopless::prelude::*;
 
 mod ui_plugin;
 
@@ -8,21 +10,25 @@ pub struct GamePlugin;
 impl Plugin for GamePlugin {
     fn build(&self, app: &mut App) {
         app
-            .init_resource::<GameState>()
-            .add_plugin(ui_plugin::UiPlugin);
+            .init_resource::<GameContext>()
+            .add_plugin(EguiPlugin)  
+            .add_plugin(ui_plugin::UiPlugin)
+            .add_loopless_state(GameState::TitleScreen)
+            .add_system(leave_title.run_in_state(GameState::TitleScreen));
     }
 }
 
-pub enum GameContext {
-    TitleScreen, TitleMenu, LoadMenu, SaveMenu, Game, GamePause
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
+pub enum GameState {
+    TitleScreen, TitleMenu, LoadMenu, SaveMenu, PlayGame, GamePause
 }
 
-pub struct GameState {
-    pub game_context: GameContext
-}
+#[derive(Default)]
+pub struct GameContext;
 
-impl Default for GameState {
-    fn default() -> Self {
-        Self { game_context: GameContext::Game }
+/// Transition back to menu on pressing Escape
+fn leave_title(mut commands: Commands, kbd: Res<Input<KeyCode>>) {
+    if kbd.just_pressed(KeyCode::Space) {
+        commands.insert_resource(NextState(GameState::PlayGame));
     }
 }
